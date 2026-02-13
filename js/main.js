@@ -49,11 +49,11 @@ const systems = [
         id: 'SYS-002',
         title: 'E-COMMERCE MODULAR MONOLITH BACKEND',
         problem: 'Monolithic e-commerce systems create deployment bottlenecks and cannot scale individual components independently during traffic spikes.',
-        architecture: 'Decomposed into Product, Order, Inventory, User services. Each service owns its database (PostgreSQL for transactions, MongoDB for product catalog). API Gateway handles routing, rate limiting, and auth propagation.',
+        architecture: 'Decomposed into modules like Product, Order, Inventory, User services. Each module has its own configuration. It helps to handle routing, rate limiting, and auth propagation.',
         diagram: `
  ┌─────────────────────────────────────────────────┐
 │              CRAFTISTAN BACKEND                  │
-│         (Spring Boot + MongoDB)                  │
+│         (Spring Boot + Postgresql + MongoDB)                  │
 └──────────────────────┬──────────────────────────┘
                        │
     ┌──────────────────┼──────────────────┐
@@ -112,7 +112,7 @@ const systems = [
         security: 'Service-to-service auth via internal JWT. User context propagated in headers. Each service validates permissions independently.',
         scalability: 'Services scale independently based on load. Product catalog read-heavy — scaled with MongoDB replicas. Orders write-heavy — PostgreSQL with connection pooling.',
         failure: 'Circuit breakers prevent cascade failures. Inventory check failure triggers order hold, not rejection. Eventual consistency via retry queues.',
-        stack: ['Spring Boot', 'Spring Cloud', 'PostgreSQL', 'MongoDB', 'Docker', 'RabbitMQ'],
+        stack: ['Spring Boot', 'Spring Cloud', 'PostgreSQL', 'MongoDB', 'Docker'],
         github: '#'
     },
     {
@@ -235,5 +235,6 @@ function renderSystems() {
         </article>
     `).join('');
 }
+
 
 
