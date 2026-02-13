@@ -47,7 +47,7 @@ const systems = [
     },
     {
         id: 'SYS-002',
-        title: 'E-COMMERCE MICROSERVICES BACKEND',
+        title: 'E-COMMERCE MODULAR MONOLITH BACKEND',
         problem: 'Monolithic e-commerce systems create deployment bottlenecks and cannot scale individual components independently during traffic spikes.',
         architecture: 'Decomposed into Product, Order, Inventory, User services. Each service owns its database (PostgreSQL for transactions, MongoDB for product catalog). API Gateway handles routing, rate limiting, and auth propagation.',
         diagram: `
@@ -62,7 +62,7 @@ const systems = [
          ▼                        ▼                        ▼
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
 │  Product Svc    │    │   Order Svc     │    │  Inventory Svc  │
-│  [MongoDB]      │    │  [PostgreSQL]   │    │  [PostgreSQL]   │
+│  [PostgreSQL]      │    │  [PostgreSQL]   │    │  [PostgreSQL]   │
 └────────┬────────┘    └────────┬────────┘    └────────┬────────┘
          │                      │                      │
          └──────────────────────┼──────────────────────┘
@@ -198,3 +198,4 @@ function renderSystems() {
         </article>
     `).join('');
 }
+
