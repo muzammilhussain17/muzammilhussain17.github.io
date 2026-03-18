@@ -182,6 +182,34 @@ const systems = [
         failure: 'Consistent error responses across all endpoints. Correlation IDs for request tracing. Health checks for dependencies. Graceful degradation when non-critical services fail.',
         stack: ['Spring Boot', 'OpenAPI', 'JPA', 'PostgreSQL', 'JUnit'],
         github: '#'
+    },
+    {
+        id: 'SYS-005',
+        title: 'MICROSERVICES BASED FITNESS TRACKING PLATFORM',
+        problem: 'Monolithic systems struggle with scalability, technology diversity, and team autonomy, necessitating a robust microservices platform designed for complex business requirements.',
+        architecture: 'Decomposed into API Gateway, User Service, AI Service, and Activity Service. Uses Spring Boot and cloud-native tech for independent scaling and continuous delivery.',
+        diagram: `
+┌─────────┐   REST    ┌─────────────┐
+│  Client │──────────▶│ API Gateway │ (Auth, Routing, Rate Limit)
+└─────────┘           └──────┬──────┘
+                             │
+            ┌────────────────┼────────────────┐
+            ▼                ▼                ▼
+     ┌────────────┐   ┌────────────┐   ┌────────────┐
+     │User Service│   │ AI Service │   │  Activity  │
+     │   (RBAC)   │   │  (NLP/ML)  │   │  Service   │
+     └─────┬──────┘   └─────┬──────┘   └─────┬──────┘
+           │                │                │
+           ▼                ▼                ▼
+     ┌────────────┐   ┌────────────┐   ┌────────────┐
+     │ PostgreSQL │   │  RabbitMQ  │   │   Redis    │
+     └────────────┘   └────────────┘   └────────────┘
+`,
+        security: 'JWT-based authentication (OAuth2/JWT), Role-based access control (RBAC), API Gateway with rate limiting (100-1000 req/min), HTTPS enforce, and rotating secrets.',
+        scalability: 'Independent scaling of services. Containerized deployment with Docker and orchestrated via Kubernetes using Helm charts for production.',
+        failure: 'API Gateway provides rate limiting and circuit breaking. Isolated service failures to prevent system-wide impact. Distributed tracing with Sleuth/Zipkin.',
+        stack: ['Spring Boot 3.1', 'PostgreSQL 14', 'RabbitMQ', 'Redis', 'Docker'],
+        github: '#'
     }
 ];
 
